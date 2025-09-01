@@ -9,7 +9,7 @@
         Description text
     """,
     "data": [
-        "views/mymodule_view.xml",
-        "security/mymodule_security.csv"
+        #"views/mymodule_view.xml",
+        "security/id.model.access.csv"
     ],
 }

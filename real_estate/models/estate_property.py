@@ -2,7 +2,7 @@ from odoo import fields, models
 
 # Model Definition
 class Vehicule(models.Model):
-   _name = "Vehicule"
+   _name = "vehicule"
    
 
 
