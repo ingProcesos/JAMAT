@@ -1,6 +1,6 @@
 # __manifest__
 {
-    "name": "New Module",
+    "name": "Real Estate",
     "version": "18.0.1.0.0",
     "depends": ["base"],
     "author": "Author Name",
