@@ -1,13 +1,13 @@
 from odoo import fields, models
 
 # Model Definition
-class EstateProperty(models.Model):
-   _name = "estate_property"
+class Vehicle(models.Model):
+   _name = "vehicle"
    
 
 
    # Fields
-   model = fields.Char(string="Estate Property Model",
+   model = fields.Char(string="Vehicle Model",
       required=True)
    vehicule_description = fields.Text()
    mileage = fields.Float(required=True)
