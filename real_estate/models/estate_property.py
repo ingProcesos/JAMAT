@@ -1,13 +1,13 @@
 from odoo import fields, models
 
 # Model Definition
-class Vehicle(models.Model):
-   _name = "vehicle"
+class Vehicule(models.Model):
+   _name = "vehicule"
    
 
 
    # Fields
-   model = fields.Char(string="Vehicle Model",
+   model = fields.Char(string="Vehicule Model",
       required=True)
    vehicule_description = fields.Text()
    mileage = fields.Float(required=True)
