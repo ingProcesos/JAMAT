@@ -1,15 +1,15 @@
 from odoo import fields, models
 
 # Model Definition
-class EstateProperty(models.Model):
-   _name = "estate.property"
-
+class Vehicule(models.Model):
+   _name = "vehicule"
+   
 
 
    # Fields
-   model = fields.Char(string="Estate Property Model",
+   model = fields.Char(string="Vehicule Model",
       required=True)
-   estate_property_description = fields.Text()
+   vehicule_description = fields.Text()
    mileage = fields.Float(required=True)
    is_available = fields.Boolean(default=True)
    last_service = fields.Date()
