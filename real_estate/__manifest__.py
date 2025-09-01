@@ -10,6 +10,6 @@
     """,
     "data": [
         #"views/mymodule_view.xml",
-       # "security/id.model.access.csv"
+        "security/ir.model.access.csv"
     ],
 }
