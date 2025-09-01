@@ -7,5 +7,9 @@
     "category": "Custom/Training",
     "description": """
         Description text
-    """
+    """,
+    "data": [
+        "views/mymodule_view.xml",
+        "security/mymodule_security.csv"
+    ],
 }
