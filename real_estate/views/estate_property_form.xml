@@ -2,8 +2,8 @@
 <odoo>
 
     <record id="estate_property_view_form" model="ir.ui.view">
-        <field name="name">estate_property.form</field>
-        <field name="model">estate_property</field>
+        <field name="name">estate.property.form</field>
+        <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <form string="Property">
                 <sheet>
@@ -24,8 +24,8 @@
     </record>
 
     <record id="estate_property_type_view_form" model="ir.ui.view">
-        <field name="name">estate_property_type.form</field>
-        <field name="model">estate_property_type</field>
+        <field name="name">estate.property.type.form</field>
+        <field name="model">estate.property.type</field>
         <field name="arch" type="xml">
             <form string="Property Type">
                 <sheet>
