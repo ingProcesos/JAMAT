@@ -21,8 +21,8 @@
             </group>
             <group string="Garden">
               <field name="garden"/>
-              <field name="garden_area" attrs="{'invisible': [('garden', '=', False)]}"/>
-              <field name="garden_orientation" attrs="{'invisible': [('garden', '=', False)]}"/>
+              <field name="garden_area" invisible="not garden"/>
+              <field name="garden_orientation" invisible="not garden"/>
             </group>
           </group>
         </sheet>
