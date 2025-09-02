@@ -1,27 +1,26 @@
 <?xml version="1.0"?>
 <odoo>
+  <!-- estate.property -->
+  <record id="estate_property_view_tree" model="ir.ui.view">
+    <field name="name">estate.property.tree</field>
+    <field name="model">estate.property</field>
+    <field name="arch" type="xml">
+      <tree string="Properties">
+        <field name="name"/>
+        <field name="property_type_id"/>
+        <field name="surface"/>
+      </tree>
+    </field>
+  </record>
 
-    <record id="estate_property_view_tree" model="ir.ui.view">
-        <field name="name">estate.property.list</field>
-        <field name="model">estate.property</field>
-        <field name="arch" type="xml">
-            <list string="Properties">
-                <field name="name"/>
-                <field name="estate_property_description"/>
-                <field name="surface"/>
-                <field name="property_type_id" string="Property Type"/>
-            </list>
-        </field>
-    </record>
-
-    <record id="estate_property_type_view_tree" model="ir.ui.view">
-        <field name="name">estate.property.type.list</field>
-        <field name="model">estate.property.type</field>
-        <field name="arch" type="xml">
-            <list string="Properties">
-                <field name="name"/>
-            </list>
-        </field>
-    </record>
-
+  <!-- estate.property.type -->
+  <record id="view_estate_property_type_tree" model="ir.ui.view">
+    <field name="name">estate.property.type.tree</field>
+    <field name="model">estate.property.type</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+      </tree>
+    </field>
+  </record>
 </odoo>

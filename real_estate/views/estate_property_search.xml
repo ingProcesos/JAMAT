@@ -1,26 +1,24 @@
 <?xml version="1.0"?>
 <odoo>
+  <record id="estate_property_view_search" model="ir.ui.view">
+    <field name="name">estate.property.search</field>
+    <field name="model">estate.property</field>
+    <field name="arch" type="xml">
+      <search string="Properties">
+        <field name="name"/>
+        <field name="property_type_id"/>
+        <field name="surface"/>
+      </search>
+    </field>
+  </record>
 
-    <record id="estate_property_view_search" model="ir.ui.view">
-        <field name="name">estate.property.search</field>
-        <field name="model">estate.property</field>
-        <field name="arch" type="xml">
-            <search string="Properties">
-                <field name="name"/>
-                <field name="estate_property_description"/>
-                <field name="surface"/>
-            </search>
-        </field>
-    </record>
-
-    <record id="estate_property_type_view_search" model="ir.ui.view">
-        <field name="name">estate.property.type.search</field>
-        <field name="model">estate.property.type</field>
-        <field name="arch" type="xml">
-            <search string="Properties">
-                <field name="name"/>
-            </search>
-        </field>
-    </record>
-
+  <record id="estate_property_type_view_search" model="ir.ui.view">
+    <field name="name">estate.property.type.search</field>
+    <field name="model">estate.property.type</field>
+    <field name="arch" type="xml">
+      <search string="Property Types">
+        <field name="name"/>
+      </search>
+    </field>
+  </record>
 </odoo>
