@@ -6,6 +6,15 @@
     <field name="arch" type="xml">
       <form string="Property">
         <sheet>
+        <header>
+            <button name="action_cancel" type="object" string="Cancel"
+                  class="btn-secondary"
+                  invisible="state in ('sold','cancelled')"/>
+
+            <button name="action_sold" type="object" string="Sold"
+                  class="btn-primary"
+                  invisible="state in ('sold','cancelled')"/>
+        </header>
           <group>
             <group>
               <field name="name"/>
@@ -24,6 +33,16 @@
               <field name="garden_area" invisible="not garden"/>
               <field name="garden_orientation" invisible="not garden"/>
             </group>
+            <group string="Offers">
+                <field name="offer_ids" context="{'default_property_id': active_id}">
+                    <list editable="bottom">
+                      <field name="partner_id"/>
+                      <field name="price"/>
+                      <field name="status"/>
+                    </list>
+                </field>
+            </group>
+
           </group>
         </sheet>
       </form>

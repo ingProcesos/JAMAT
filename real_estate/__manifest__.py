@@ -15,6 +15,7 @@
             'views/estate_property_form.xml',         # form estate.property
             'views/estate_property_list.xml',         # list estate.property
             'views/estate_property_search.xml',
+            'views/estate_property_offer_views.xml',   # views de las ofertas
             'views/estate_property_menu.xml',         # menús al final
     ],
 }

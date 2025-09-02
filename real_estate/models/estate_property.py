@@ -1,28 +1,19 @@
 from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Real Estate Property"
 
-    name = fields.Char(string="Estate Property Name", required=True)
+    name = fields.Char(required=True)
     estate_property_description = fields.Text()
+
+    # Relación existente
     property_type_id = fields.Many2one("estate.property.type", string="Property Type")
 
-    # Áreas
+    # Áreas (ejercicio previo)
     living_area = fields.Float(string="Living Area")
     garden_area = fields.Float(string="Garden Area")
-
-    # Nuevo: jardín y orientación
-    garden = fields.Boolean(string="Garden")
-    garden_orientation = fields.Selection(
-        [
-            ("north", "North"),
-            ("south", "South"),
-            ("east", "East"),
-            ("west", "West"),
-        ],
-        string="Garden Orientation",
-    )
 
     total_area = fields.Float(
         string="Total Area",
@@ -31,20 +22,44 @@ class EstateProperty(models.Model):
         readonly=True,
     )
 
+    # Estado del inmueble
+    state = fields.Selection(
+        [
+            ("new", "New"),
+            ("offer_received", "Offer Received"),
+            ("offer_accepted", "Offer Accepted"),
+            ("sold", "Sold"),
+            ("cancelled", "Cancelled"),
+        ],
+        string="Status",
+        default="new",
+        readonly=True,
+        copy=False,
+    )
+
+    # Se llenan cuando se acepta una oferta
+    buyer_id = fields.Many2one("res.partner", string="Buyer", readonly=True, copy=False)
+    selling_price = fields.Float(string="Selling Price", readonly=True, copy=False)
+
+    offer_ids = fields.One2many("estate.property.offer", "property_id", string="Offers")
+
     @api.depends("living_area", "garden_area")
     def _compute_total_area(self):
         for rec in self:
             rec.total_area = (rec.living_area or 0.0) + (rec.garden_area or 0.0)
 
-    # >>> ONCHANGE requerido por el ejercicio <<<
-    @api.onchange("garden")
-    def _onchange_garden(self):
+    # Botón: Sold
+    def action_sold(self):
         for rec in self:
-            if rec.garden:
-                # Al marcar: fija valores
-                rec.garden_area = 10.0
-                rec.garden_orientation = "north"
-            else:
-                # Al desmarcar: limpia campos
-                rec.garden_area = 0.0
-                rec.garden_orientation = False
+            if rec.state == "cancelled":
+                raise UserError("A cancelled property cannot be set as sold.")
+            rec.state = "sold"
+        return True
+
+    # Botón: Cancel
+    def action_cancel(self):
+        for rec in self:
+            if rec.state == "sold":
+                raise UserError("A sold property cannot be cancelled.")
+            rec.state = "cancelled"
+        return True
