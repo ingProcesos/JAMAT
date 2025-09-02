@@ -3,7 +3,7 @@ from odoo import fields, models
 
 # Model Definition
 class EstateProperty(models.Model):
-   _name = "estate.property"
+   _name = "estate_property"
    _description = "Real Estate Property"
    
 
