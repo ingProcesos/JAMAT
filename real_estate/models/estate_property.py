@@ -8,8 +8,12 @@ class EstateProperty(models.Model):
     name = fields.Char(required=True)
     estate_property_description = fields.Text()
 
+    tag_ids = fields.Many2many('estate.property.tag', string="Tags")
+    
     # Relación existente
     property_type_id = fields.Many2one("estate.property.type", string="Property Type")
+
+    expected_price = fields.Float(string="Expected Price", required=True, default=1.0)
 
     # Áreas (ejercicio previo)
     living_area = fields.Float(string="Living Area")
@@ -86,3 +90,13 @@ class EstateProperty(models.Model):
             else:
                 rec.garden_area = 0.0
                 rec.garden_orientation = False
+  
+    # >>> SQL CONSTRAINTS <<<
+    _sql_constraints = [
+        ('check_expected_price_positive',
+         'CHECK(expected_price > 0)',
+         'The expected price must be strictly positive.'),
+        ('check_selling_price_positive',
+         'CHECK(selling_price >= 0)',
+         'The selling price must be positive.'),
+    ]
