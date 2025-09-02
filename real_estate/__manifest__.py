@@ -9,12 +9,12 @@
         Description text
     """,
     "data": [
-        "views/estate_property_views.xml",
-        "views/estate_property_type_views.xml",
-        "views/estate_property_list.xml",
-        "views/estate_property_form.xml",
-        "views/estate_property_search.xml",
-        "views/estate_property_menu.xml",
-        "security/ir.model.access.csv"
+            'security/ir.model.access.csv',
+            'views/estate_property_views.xml',        # action estate.property
+            'views/estate_property_type_views.xml',   # list+form+action del tipo
+            'views/estate_property_form.xml',         # form estate.property
+            'views/estate_property_list.xml',         # list estate.property
+            'views/estate_property_search.xml',
+            'views/estate_property_menu.xml',         # menús al final
     ],
 }
