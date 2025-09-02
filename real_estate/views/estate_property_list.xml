@@ -9,6 +9,7 @@
                 <field name="name"/>
                 <field name="estate_property_description"/>
                 <field name="surface"/>
+                <field name="property_type_id" string="Property Type"/>
             </list>
         </field>
     </record>

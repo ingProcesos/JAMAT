@@ -12,3 +12,8 @@ class EstateProperty(models.Model):
    name = fields.Char(string="Estate Property Name",required=True)
    estate_property_description = fields.Text()
    surface = fields.Float(required=True)
+    # ... tus campos existentes ...
+   property_type_id = fields.Many2one(
+        "estate.property.type",
+        string="Property Type"
+    )
