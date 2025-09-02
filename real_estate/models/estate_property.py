@@ -90,6 +90,20 @@ class EstateProperty(models.Model):
             else:
                 rec.garden_area = 0.0
                 rec.garden_orientation = False
+
+
+    def write(self, vals):
+        # impide modificar registros bloqueados
+        locked = self.filtered(lambda r: r.state in ('sold', 'cancelled'))
+        if locked:
+            raise UserError("You cannot modify a property that is Sold or Cancelled.")
+        return super().write(vals)
+
+    def unlink(self):
+        # impide borrar registros bloqueados
+        if any(r.state in ('sold', 'cancelled') for r in self):
+            raise UserError("You cannot delete a property that is Sold or Cancelled.")
+        return super().unlink()
   
     # >>> SQL CONSTRAINTS <<<
     _sql_constraints = [
