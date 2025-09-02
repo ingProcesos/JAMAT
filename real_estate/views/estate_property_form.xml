@@ -8,12 +8,14 @@
 
         <!-- El header va aquí, hijo directo del form -->
         <header>
-            <button name="action_cancel" type="object" string="Cancel" class="btn-secondary"/>
-            <button name="action_sold"   type="object" string="Sold"   class="btn-secondary"/>
+        <button name="action_cancel" type="object" string="Cancel" class="btn-secondary"/>
+        <button name="action_sold"   type="object" string="Sold"   class="btn-secondary"/>
 
-            <field name="state" widget="statusbar"
-                    statusbar_visible="new,sold,cancelled"/>
+        <!-- Mostrar todos los pasos -->
+        <field name="state" widget="statusbar"
+                statusbar_visible="new,offer_received,offer_accepted,sold,cancelled"/>
         </header>
+
    
 
         <sheet>

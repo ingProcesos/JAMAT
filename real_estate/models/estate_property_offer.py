@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import api, fields, models           # <- agrega api al import
 from odoo.exceptions import UserError
 
 class EstatePropertyOffer(models.Model):
@@ -13,7 +13,15 @@ class EstatePropertyOffer(models.Model):
         copy=False
     )
 
-    # Botón: Accept
+    @api.model
+    def create(self, vals):
+        offer = super().create(vals)
+        prop = offer.property_id
+        # cuando nace una oferta, mostramos el paso "Offer Received"
+        if prop and prop.state == "new":
+            prop.state = "offer_received"
+        return offer
+
     def action_accept(self):
         for offer in self:
             # Solo una oferta aceptada por propiedad
@@ -24,6 +32,9 @@ class EstatePropertyOffer(models.Model):
                 raise UserError("Only one offer can be accepted for a property.")
 
             offer.status = "accepted"
+            # (opcional) rechaza automáticamente las demás ofertas
+            (offer.property_id.offer_ids - offer).write({"status": "refused"})
+
             offer.property_id.write({
                 "buyer_id": offer.partner_id.id,
                 "selling_price": offer.price,
@@ -31,11 +42,9 @@ class EstatePropertyOffer(models.Model):
             })
         return True
 
-    # Botón: Refuse
     def action_refuse(self):
         self.write({"status": "refused"})
         return True
-    # ... action_accept / action_refuse que ya tienes ...
 
     _sql_constraints = [
         ('check_offer_price_positive',
