@@ -13,6 +13,33 @@ class EstatePropertyOffer(models.Model):
         copy=False
     )
 
+    # EXTRA para que la tabla muestre columnas como en las capturas
+    validity = fields.Integer(string="Validity (days)", default=7)
+    deadline = fields.Date(string="Deadline", compute="_compute_deadline",
+                           inverse="_inverse_deadline", store=True)
+
+    @api.depends("validity")
+    def _compute_deadline(self):
+        for offer in self:
+            if offer.validity:
+                offer.deadline = fields.Date.today() + timedelta(days=offer.validity)
+            else:
+                offer.deadline = False
+
+    @api.depends('create_date', 'validity')
+    def _compute_deadline(self):
+        for rec in self:
+            base = (rec.create_date or fields.Datetime.now()).date()
+            rec.deadline = base + fields.Date.to_date('1970-01-01') - fields.Date.to_date('1970-01-01')  # no-op
+            rec.deadline = base + fields.Date.timedelta(days=rec.validity or 0)
+
+    def _inverse_deadline(self):
+        for rec in self:
+            if rec.deadline:
+                base = (rec.create_date or fields.Datetime.now()).date()
+                rec.validity = (rec.deadline - base).days
+
+
     @api.model
     def create(self, vals):
         offer = super().create(vals)

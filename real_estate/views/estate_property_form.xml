@@ -44,14 +44,22 @@
             </group>
 
             <group string="Offers">
-                <field name="offer_ids">
-                <list editable="bottom">
-                    <field name="partner_id"/>
-                    <field name="price"/>
-                    <field name="status"/>
-                </list>
+                <field name="offer_ids" readonly="state in ('sold','cancelled')">
+                        <list editable="bottom">
+                            <field name="price"/>
+                            <field name="partner_id"/>
+                            <field name="validity"/>
+                            <field name="deadline"/>
+                            <!-- Botones con iconos -->
+                            <button name="action_accept" type="object" icon="fa-check"
+                                    invisible="status == 'accepted'"/>
+                            <button name="action_refuse" type="object" icon="fa-times"
+                                    invisible="status == 'refused'"/>
+                            <field name="status"/>
+                        </list>
                 </field>
             </group>
+
 
           </group>
         </sheet>

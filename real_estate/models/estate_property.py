@@ -9,6 +9,8 @@ class EstateProperty(models.Model):
     estate_property_description = fields.Text()
 
     tag_ids = fields.Many2many('estate.property.tag', string="Tags")
+
+    best_offer = fields.Float(string="Best Offer", compute="_compute_best_offer", store=True, readonly=True)
     
     # Relación existente
     property_type_id = fields.Many2one("estate.property.type", string="Property Type")
@@ -63,6 +65,13 @@ class EstateProperty(models.Model):
     def _compute_total_area(self):
         for rec in self:
             rec.total_area = (rec.living_area or 0.0) + (rec.garden_area or 0.0)
+
+    @api.depends('offer_ids.price')
+    def _compute_best_offer(self):
+        for rec in self:
+            prices = rec.offer_ids.mapped('price')
+            rec.best_offer = max(prices) if prices else 0.0
+
 
     # Botón: Sold
     def action_sold(self):
