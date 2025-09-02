@@ -19,6 +19,11 @@
               <field name="garden_area"/>
               <field name="total_area" readonly="1"/>
             </group>
+            <group string="Garden">
+              <field name="garden"/>
+              <field name="garden_area" attrs="{'invisible': [('garden', '=', False)]}"/>
+              <field name="garden_orientation" attrs="{'invisible': [('garden', '=', False)]}"/>
+            </group>
           </group>
         </sheet>
       </form>
