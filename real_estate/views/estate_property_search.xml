@@ -15,7 +15,7 @@
 
     <record id="estate_property_type_view_search" model="ir.ui.view">
         <field name="name">estate_property_type.search</field>
-        <field name="model">estate.property.type</field>
+        <field name="model">estate_property_type</field>
         <field name="arch" type="xml">
             <search string="Properties">
                 <field name="name"/>
