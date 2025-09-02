@@ -1,13 +1,31 @@
 <?xml version="1.0"?>
 <odoo>
 
-    <menuitem id="estate_property_root" name="Estate Property">
-        <menuitem id="estate_property_first_level_menu" name="Advertisement">
-            <menuitem id="estate_property_menu_action" action="estate_property_action"/>
-        </menuitem>
-        <menuitem id="estate_property_second_level_menu" name="Settings">
-            <menuitem id="estate_property_menu_action" action="estate_property_action"/>            
-        </menuitem>
-    </menuitem>
+    <!-- Menú raíz -->
+    <menuitem id="estate_property_root" name="Estate Property" sequence="10"/>
+
+    <!-- Nivel 1 -->
+    <menuitem id="estate_property_first_level_menu"
+              name="Advertisement"
+              parent="estate_property_root"
+              sequence="10"/>
+
+    <menuitem id="estate_property_second_level_menu"
+              name="Settings"
+              parent="estate_property_root"
+              sequence="20"/>
+
+    <!-- Hojas con la misma acción pero IDs distintos -->
+    <menuitem id="estate_property_menu_action_advertisement"
+              name="Estate Property action"
+              parent="estate_property_first_level_menu"
+              action="estate_property_action"
+              sequence="10"/>
+
+    <menuitem id="estate_property_menu_action_settings"
+              name="Estate Property action"
+              parent="estate_property_second_level_menu"
+              action="estate_property_action"
+              sequence="10"/>
 
 </odoo>
