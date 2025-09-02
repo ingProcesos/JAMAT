@@ -5,8 +5,10 @@
         <field name="name">estate_property.list</field>
         <field name="model">estate_property</field>
         <field name="arch" type="xml">
-            <list string="Channel">
-                <field name="name"/>
+            <list string="Properties">
+                <field name="model"/>
+                <field name="estate_property_description"/>
+                <field name="surface"/>
             </list>
         </field>
     </record>
