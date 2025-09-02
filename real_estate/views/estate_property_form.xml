@@ -34,9 +34,11 @@
             </group>
 
             <group string="Garden">
-              <field name="garden"/>
-              <field name="garden_area" invisible="not garden"/>
-              <field name="garden_orientation" invisible="not garden"/>
+              <field name="garden" readonly="state in ('sold','cancelled')"/>
+              <field name="garden_area"
+                    readonly="not garden or state in ('sold','cancelled')"/>
+              <field name="garden_orientation"
+                    readonly="not garden or state in ('sold','cancelled')"/>
             </group>
 
             <group string="Offers">
