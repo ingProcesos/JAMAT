@@ -7,8 +7,7 @@ class EstateProperty(models.Model):
 
 
    # Fields
-   model = fields.Char(string="Estate Property Model",
-      required=True)
+   name = fields.Char(string="Estate Property Name",required=True)
    estate_property_description = fields.Text()
    surface = fields.Float(required=True)
 

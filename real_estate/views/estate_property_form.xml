@@ -9,7 +9,7 @@
                 <sheet>
                     <group>
                         <group>
-                            <field name="model"/>
+                            <field name="name"/>
                         </group>
                         <group>
                             <field name="estate_property_description"/>
