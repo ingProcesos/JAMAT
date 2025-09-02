@@ -15,6 +15,18 @@ class EstateProperty(models.Model):
     living_area = fields.Float(string="Living Area")
     garden_area = fields.Float(string="Garden Area")
 
+    # >>> NUEVO: jardín y orientación <<<
+    garden = fields.Boolean(string="Garden")
+    garden_orientation = fields.Selection(
+        [
+            ("north", "North"),
+            ("south", "South"),
+            ("east", "East"),
+            ("west", "West"),
+        ],
+        string="Garden Orientation",
+    )
+
     total_area = fields.Float(
         string="Total Area",
         compute="_compute_total_area",
@@ -63,3 +75,14 @@ class EstateProperty(models.Model):
                 raise UserError("A sold property cannot be cancelled.")
             rec.state = "cancelled"
         return True
+
+    # >>> ONCHANGE requerido por el ejercicio <<<
+    @api.onchange("garden")
+    def _onchange_garden(self):
+        for rec in self:
+            if rec.garden:
+                rec.garden_area = 10.0
+                rec.garden_orientation = "north"
+            else:
+                rec.garden_area = 0.0
+                rec.garden_orientation = False

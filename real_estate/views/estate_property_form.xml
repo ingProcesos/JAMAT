@@ -5,42 +5,53 @@
     <field name="model">estate.property</field>
     <field name="arch" type="xml">
       <form string="Property">
-        <sheet>
-        <header>
-            <button name="action_cancel" type="object" string="Cancel"
-                  class="btn-secondary"
-                  invisible="state in ('sold','cancelled')"/>
 
-            <button name="action_sold" type="object" string="Sold"
+        <!-- El header va aquí, hijo directo del form -->
+        <header>
+          <button name="action_cancel" type="object" string="Cancel"
+                  class="btn-secondary"
+                  invisible="state == 'sold' or state == 'cancelled'"/>
+
+          <button name="action_sold" type="object" string="Sold"
                   class="btn-primary"
-                  invisible="state in ('sold','cancelled')"/>
+                  invisible="state == 'sold' or state == 'cancelled'"/>
+
+          <!-- Opcional: statusbar bonito para el estado -->
+          <field name="state" widget="statusbar"
+                 statusbar_visible="new,offer_received,offer_accepted,sold,cancelled"/>
         </header>
+
+        <sheet>
           <group>
             <group>
               <field name="name"/>
               <field name="property_type_id" string="Property Type"/>
             </group>
+
             <group>
               <field name="estate_property_description"/>
             </group>
-            <group>
+
+            <group string="Areas">
               <field name="living_area"/>
-              <field name="garden_area"/>
+              <!-- Quitamos garden_area aquí para no duplicar -->
               <field name="total_area" readonly="1"/>
             </group>
+
             <group string="Garden">
               <field name="garden"/>
               <field name="garden_area" invisible="not garden"/>
               <field name="garden_orientation" invisible="not garden"/>
             </group>
+
             <group string="Offers">
-                <field name="offer_ids" context="{'default_property_id': active_id}">
-                    <list editable="bottom">
-                      <field name="partner_id"/>
-                      <field name="price"/>
-                      <field name="status"/>
-                    </list>
-                </field>
+              <field name="offer_ids" context="{'default_property_id': active_id}">
+                <list editable="bottom">
+                  <field name="partner_id"/>
+                  <field name="price"/>
+                  <field name="status"/>
+                </list>
+              </field>
             </group>
 
           </group>
