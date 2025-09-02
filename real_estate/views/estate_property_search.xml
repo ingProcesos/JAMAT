@@ -7,7 +7,7 @@
       <search string="Properties">
         <field name="name"/>
         <field name="property_type_id"/>
-        <field name="surface"/>
+        <field name="total_area"/>
       </search>
     </field>
   </record>
