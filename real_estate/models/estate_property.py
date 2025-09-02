@@ -1,8 +1,10 @@
 from odoo import fields, models
 
+
 # Model Definition
 class EstateProperty(models.Model):
-   _name = "estate_property"
+   _name = "estate.property"
+   _description = "Real Estate Property"
    
 
 
@@ -10,4 +12,3 @@ class EstateProperty(models.Model):
    name = fields.Char(string="Estate Property Name",required=True)
    estate_property_description = fields.Text()
    surface = fields.Float(required=True)
-
