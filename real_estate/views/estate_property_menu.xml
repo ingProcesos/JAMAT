@@ -18,11 +18,6 @@
             action="estate_property_action"
             sequence="10"/>
 
-  <menuitem id="estate_property_menu_action_settings"
-            name="Estate Properties"
-            parent="estate_property_menu_settings"
-            action="estate_property_action"
-            sequence="10"/>
 
   <menuitem id="estate_property_menu_property_types"
             name="Property Types"
