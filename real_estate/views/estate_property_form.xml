@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<odoo>
+  <record id="estate_property_view_form" model="ir.ui.view">
+    <field name="name">estate.property.form</field>
+    <field name="model">estate.property</field>
+    <field name="arch" type="xml">
+      <form string="Property">
+
+        <!-- El header va aquí, hijo directo del form -->
+        <header>
+        <button name="action_cancel" type="object" string="Cancel" class="btn-secondary"/>
+        <button name="action_sold"   type="object" string="Sold"   class="btn-secondary"/>
+
+        <!-- Mostrar todos los pasos -->
+        <field name="state" widget="statusbar"
+                statusbar_visible="new,offer_received,offer_accepted,sold,cancelled"/>
+        </header>
+
+   
+
+        <sheet>
+          <group>
+            <group>
+              <field name="name"/>
+              <field name="property_type_id" string="Property Type"/>
+            </group>
+
+            <group>
+              <field name="estate_property_description"/>
+            </group>
+
+            <group string="Areas">
+              <field name="living_area"/>
+              <!-- Quitamos garden_area aquí para no duplicar -->
+              <field name="total_area" readonly="1"/>
+            </group>
+
+            <group string="Garden">
+              <field name="garden" readonly="state in ('sold','cancelled')"/>
+              <field name="garden_area"
+                    readonly="not garden or state in ('sold','cancelled')"/>
+              <field name="garden_orientation"
+                    readonly="not garden or state in ('sold','cancelled')"/>
+            </group>
+
+            <group string="Offers" colspan="2">
+                <field name="offer_ids" nolabel="1" readonly="state in ('sold','cancelled')">
+                    <list editable="bottom" style="min-height: 45vh;">
+                        <field name="price"/>
+                        <field name="partner_id"/>
+                        <field name="validity"/>
+                        <field name="deadline"/>
+                        <button name="action_accept" type="object" icon="fa-check"
+                                invisible="status == 'accepted'"/>
+                        <button name="action_refuse" type="object" icon="fa-times"
+                                invisible="status == 'refused'"/>
+                    <field name="status"/>
+                    </list>
+                </field>
+            </group>
+
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+</odoo>
